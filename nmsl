@@ -1,0 +1,114 @@
+#!/usr/bin/env node
+const chalk = require('chalk');
+const execSync = require('child_process').execSync;
+const { executeMe } = require('execute-me');
+const fs = require('fs');
+const mkdirp = require('mkdirp');
+const ncp = require('ncp').ncp;
+const nodePath = require('path');
+const version = require('./package.json').version;
+
+const logger = {
+  log(a = '') {
+    console.log(a);
+  },
+  success(a = '') {
+    console.log(`${chalk.green('success')} ${a}`);
+  },
+  error(a = '') {
+    console.log(`${chalk.red('error')} ${a}`);
+  },
+  warning(a = '') {
+    console.log(`${chalk.yellow('warning')} ${a}`);
+  },
+  pri(a = '') {
+    console.log(`${chalk.blue(a)}`);
+  }
+};
+
+module.exports = createProject;
+
+if (require.main === module) {
+  executeMe(createProject);
+}
+
+function createProject(path) {
+  /**
+   * nmsl - Your 🐴 is dead.
+   * Initialize a TypeScript project.
+   *
+   * @version 0.0.1
+   * @param {string} path - project path
+   */
+  if (!path) {
+    logger.error('Path should be specified.');
+    logger.error('Use `nmsl -p <project-path>` to create a project.');
+    process.exit(-1);
+  }
+  const destination = nodePath.resolve(path);
+  const name = nodePath.basename(destination);
+
+  logger.log(chalk.bold(`nmsl v${version}`));
+  logger.log(`Create project "${name}" in ${chalk.underline(destination)}`);
+  logger.log('');
+
+  mkdirp.sync(destination);
+  try {
+    const destDir = fs.readdirSync(destination);
+    if (destDir.length !== 0) {
+      logger.error('The directory is not empty.');
+      process.exit(1);
+    }
+  } catch (e) {
+    console.error(e);
+    process.exit(2);
+  }
+
+  ncp(nodePath.resolve(__dirname, 'template'), destination, (err) => {
+    if (err) {
+      console.error(err);
+      logger.error('Generate files error.');
+      process.exit(3);
+    }
+
+    process.chdir(destination);
+    const yarnVersion = checkYarn();
+    let pm, run;
+    if (yarnVersion) {
+      pm = 'yarn';
+      run = ''
+    } else {
+      pm = 'npm';
+      run = ' run';
+    }
+    execSync(`${pm} install`, {
+      stdio: [0, 1, 2],
+    });
+
+    logger.log();
+    logger.success(`Created ${name} at ${chalk.underline(destination)}`);
+    logger.log('Inside that directory, you can run several commands:');
+    logger.log();
+    logger.pri(`  ${pm}${run} build`);
+    logger.log('    Compile the TypeScript source code to JavaScript.');
+    logger.pri(`  ${pm} test`);
+    logger.log('    Test the source code');
+    logger.pri(`  ${pm}${run} lint`);
+    logger.log('    Check the coding style with tslint and prettier.');
+    logger.pri(`  ${pm}${run} fix`);
+    logger.log('    Fix the coding style with tslint and prettier.');
+    logger.log();
+    logger.log('We suggest that you begin by typing:');
+    logger.log();
+    logger.log(`  ${chalk.blue('cd')} ${destination}`);
+    logger.pri(`  ${pm} start`);
+  });
+};
+
+function checkYarn() {
+  try {
+    return execSync('yarn --version').toString().trim();
+  } catch (e) {
+    return null;
+  }
+}
