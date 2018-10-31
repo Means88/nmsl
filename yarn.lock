@@ -56,9 +56,9 @@ esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
 
-execute-me@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/execute-me/-/execute-me-0.1.2.tgz#fe415a6830c421b492a5ababf49b1c3855c5e189"
+execute-me@0.2:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/execute-me/-/execute-me-0.2.0.tgz#bc9a16dc443d250b6674b10e82671bbecc5b8ab4"
   dependencies:
     "@babel/parser" "^7.1.0"
     "@babel/types" "^7.1.0"

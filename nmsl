@@ -40,12 +40,14 @@ function createProject(path) {
    * @version 0.0.1
    * @param {string} path - project path
    */
-  if (!path) {
+  if (!path && !arguments[1]) {
     logger.error('Path should be specified.');
-    logger.error('Use `nmsl -p <project-path>` to create a project.');
+    logger.error('Use `nmsl <project-path>` or `nmsl -p <project-path>` to create a project.');
+    logger.error('Use `nmsl -h` for detail.');
     process.exit(-1);
   }
-  const destination = nodePath.resolve(path);
+
+  const destination = nodePath.resolve(path || arguments[1][0]);
   const name = nodePath.basename(destination);
 
   logger.log(chalk.bold(`nmsl v${version}`));

@@ -1,6 +1,18 @@
-# NMSL
+# NMSL [![npm 0.0.3](https://img.shields.io/badge/npm-0.0.3-red.svg)](https://www.npmjs.com/package/nmsl)
 
-```console
+_—— Your 🐴 is dead._
+
+Create TypeScript project.
+
+---
+
+## Usage
+
+```bash
 npm install -g nmsl
-nmsl -p <project-path>
+nmsl <project-path>
 ```
+
+## License
+MIT
+

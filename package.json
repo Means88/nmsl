@@ -1,6 +1,6 @@
 {
   "name": "nmsl",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Your 🐴 is dead.",
   "main": "index.js",
   "bin": "nmsl",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "execute-me": "^0.1.2",
+    "execute-me": "^0.2.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0"
   },
