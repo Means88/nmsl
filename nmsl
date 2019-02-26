@@ -37,7 +37,7 @@ function createProject(path) {
    * nmsl - Your 🐴 is dead.
    * Initialize a TypeScript project.
    *
-   * @version 0.0.1
+   * @version 0.0.4
    * @param {string} path - project path
    */
   if (!path && !arguments[1]) {
@@ -74,6 +74,22 @@ function createProject(path) {
     }
 
     process.chdir(destination);
+    const packagePath = nodePath.resolve(destination, 'package.json');
+    const packageJson = fs.readFileSync(packagePath);
+    const package = JSON.parse(packageJson.toString());
+    package.name = name;
+    try {
+      const userName = execSync('git config --get user.name').toString();
+      const email = execSync('git config --get user.email').toString();
+      package.author = {
+        name: userName.trim(),
+        email: email.trim(),
+      };
+    } catch (e) {
+      // pass
+    }
+    fs.writeFileSync(packagePath, JSON.stringify(package, null, 2));
+
     const yarnVersion = checkYarn();
     let pm, run;
     if (yarnVersion) {
@@ -103,7 +119,7 @@ function createProject(path) {
     logger.log('We suggest that you begin by typing:');
     logger.log();
     logger.log(`  ${chalk.blue('cd')} ${destination}`);
-    logger.pri(`  ${pm} start`);
+    // logger.pri(`  ${pm} start`);
   });
 };
 

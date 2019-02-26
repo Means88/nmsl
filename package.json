@@ -49,5 +49,8 @@
   "files": [
     "nmsl",
     "template"
-  ]
+  ],
+  "devDependencies": {
+    "np": "^4.0.2"
+  }
 }
