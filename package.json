@@ -52,5 +52,8 @@
   ],
   "devDependencies": {
     "np": "^4.0.2"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
