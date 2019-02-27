@@ -1,6 +1,6 @@
 {
   "name": "nmsl",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Your 🐴 is dead.",
   "main": "index.js",
   "bin": "nmsl",
