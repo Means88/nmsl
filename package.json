@@ -1,0 +1,59 @@
+{
+  "name": "nmsl",
+  "version": "0.0.6",
+  "description": "Your 🐴 is dead.",
+  "main": "index.js",
+  "bin": "nmsl",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Means88/nmsl.git"
+  },
+  "keywords": [
+    "cli",
+    "typescript"
+  ],
+  "author": "Means88",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Means88/nmsl/issues"
+  },
+  "homepage": "https://github.com/Means88/nmsl#readme",
+  "jest": {
+    "collectCoverage": true,
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/*.test.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "./tsconfig.json"
+      }
+    }
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "execute-me": "^0.2.0",
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0"
+  },
+  "files": [
+    "nmsl",
+    "template"
+  ],
+  "devDependencies": {
+    "np": "^4.0.2"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
